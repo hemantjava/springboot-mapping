@@ -23,6 +23,7 @@ class PassportRepositoryTest {
     void show(){
         List<Passport> passport = passportRepository.findAll();
         passport.forEach(log::info);
+        assertNotNull(passport);
 
     }
 

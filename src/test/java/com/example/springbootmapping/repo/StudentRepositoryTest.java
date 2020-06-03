@@ -21,6 +21,7 @@ class StudentRepositoryTest {
     void show(){
         List<Student> student = studentRepository.findAll();
         student.forEach(log::info);
+        assertNotNull(student);
 
     }
 
