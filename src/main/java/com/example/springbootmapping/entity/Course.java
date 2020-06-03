@@ -6,11 +6,13 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 @Builder
+@Setter
+@Getter
 @Entity
 public class Course {
 
@@ -22,5 +24,21 @@ public class Course {
     private LocalDateTime insertDate;
     @UpdateTimestamp
     private LocalDateTime updateDate;
+
+    @Override
+    public String toString ( ) {
+        return "Course{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", insertDate=" + insertDate +
+                ", updateDate=" + updateDate +'}';
+    }
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "course")
+    private List<Review> reviews;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_student",nullable = false)
+    private Student student;
 
 }

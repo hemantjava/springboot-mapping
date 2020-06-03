@@ -1,15 +1,13 @@
 package com.example.springbootmapping.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Setter
+@Getter
 @Builder
 @Entity
 public class Review {
@@ -20,4 +18,17 @@ public class Review {
     @Column(nullable = true)
     private Byte rating;
     private String description;
+
+    @Override
+    public String toString ( ) {
+        return "Review{" +
+                "id=" + id +
+                ", rating=" + rating +
+                ", description='" + description + '\'' +
+                '}';
+    }
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_course")
+    private Course course;
 }
